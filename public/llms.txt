@@ -1,0 +1,11 @@
+# NRS Risk Management Portal
+
+> Nigeria Revenue Service enterprise risk management portal for risk identification, assessment, mitigation, and monitoring. ISO 31000 compliant, powered by RiskRadar.
+
+## Pages
+
+- [Home](/): Overview of the Risk Management Portal and quick access to modules.
+- [Help Center & FAQ](/help): Frequently asked questions covering risk register, matrix, dashboard, BCP, and forum usage.
+- [Documentation](/docs): Role-based user guides, permissions matrix, and reference material.
+- [Submit a Whistleblow Report](/whistleblow/submit): Anonymous incident reporting portal — no login required.
+- [Check Case Status](/whistleblow/follow-up): Follow up on a submitted whistleblow report using a case reference and passphrase.

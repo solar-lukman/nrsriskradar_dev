@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Security headers (defense-in-depth; primary enforcement is server-side) -->
+    <!-- Security headers (defense-in-depth; primary enforcement is server-side) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=()" />
+    <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.gpteng.co https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://cdn.gpteng.co https://challenges.cloudflare.com ws: wss:; frame-src 'self' https://challenges.cloudflare.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests" />
+    <title>NRS Risk Management Portal - Powered By RiskRadar</title>
+    <meta name="description" content="Nigeria Revenue Service enterprise risk management portal for risk identification, assessment, mitigation, and monitoring. Powered by RiskRadar from CODEWARE NG">
+    <meta name="keywords" content="NRS, Nigeria Revenue Service, risk management, enterprise risk, risk assessment, risk mitigation, compliance, ISO 31000, business continuity, risk reporting, risk matrix, ERM" />
+    <meta name="author" content="Nigeria Revenue Service" />
+    
+   <!-- Favicon -->
+   <link rel="icon" type="image/png" href="/favicon.png">
+   <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!-- Open Graph / Facebook (sitewide fallback; per-route tags via react-helmet-async override for JS-executing crawlers) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://nrsrmp.codeware.com.ng/uploads/d8c99973-7738-403f-be00-c2db452b33f4.png">
+    <meta property="og:url" content="https://nrsrmp.codeware.com.ng/" />
+    <meta property="og:site_name" content="NRS Risk Management Portal" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://nrsrmp.codeware.com.ng/uploads/d8c99973-7738-403f-be00-c2db452b33f4.png">
+
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1B5E3A" />
+    <meta property="og:title" content="NRS Risk Management Portal - Powered By RiskRadar">
+  <meta name="twitter:title" content="NRS Risk Management Portal - Powered By RiskRadar">
+  <meta property="og:description" content="Nigeria Revenue Service enterprise risk management portal for risk identification, assessment, mitigation, and monitoring. Powered by RiskRadar from CODEWARE NG">
+  <meta name="twitter:description" content="Nigeria Revenue Service enterprise risk management portal for risk identification, assessment, mitigation, and monitoring. Powered by RiskRadar from CODEWARE NG">
+</head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
