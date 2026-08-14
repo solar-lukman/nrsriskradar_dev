@@ -135,7 +135,7 @@ test.describe('UAT-BCP business continuity journey', () => {
   });
 
   test('UAT-BCP-05 editing BIA fields twice shows a diff with author and timestamp ordering', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-BCP-05' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-BCP-extra-diff' });
     const owner = byRole('RMD') || byRole('ADMIN');
     test.skip(!owner, 'No BCP-authoring credentials configured');
     test.setTimeout(150_000);
@@ -196,7 +196,7 @@ test.describe('UAT-BCP business continuity journey', () => {
   });
 
   test('UAT-BCP-04 schema-check log page is admin/RMD only', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-BCP-04' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-BCP-05' });
     const viewer = byRole('RC') || byRole('USER') || byRole('EC');
     test.skip(!viewer, 'No restricted-role credentials configured');
 

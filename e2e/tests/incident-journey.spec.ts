@@ -13,7 +13,7 @@ test.describe('UAT-INC incident journey', () => {
   test.skip(users.length === 0, 'No E2E user credentials configured');
 
   test('UAT-INC-01 incidents table supports search, filter and URL state', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-INC-01' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-INC-extra-table' });
     const u = byRole('RMD') || byRole('ADMIN') || byRole('CRO');
     test.skip(!u, 'No incident-viewing credentials configured');
     test.setTimeout(120_000);
@@ -38,7 +38,7 @@ test.describe('UAT-INC incident journey', () => {
   });
 
   test('UAT-INC-02 CSV export is offered and triggers a download', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-INC-02' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-INC-extra-csv' });
     const u = byRole('RMD') || byRole('ADMIN');
     test.skip(!u, 'No incident-viewing credentials configured');
 
@@ -60,7 +60,7 @@ test.describe('UAT-INC incident journey', () => {
   });
 
   test('UAT-INC-03 incident owner can be assigned and the incident closed', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-INC-03' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-INC-01' });
     const u = byRole('RMD') || byRole('ADMIN');
     test.skip(!u, 'No incident-managing credentials configured');
     test.setTimeout(120_000);
@@ -90,7 +90,7 @@ test.describe('UAT-INC incident journey', () => {
   });
 
   test('UAT-INC-05 reassigning the owner is recorded in the timeline, and the notification deep-link opens the incident', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-INC-05' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-INC-02' });
     const u = byRole('RMD') || byRole('ADMIN');
     test.skip(!u, 'No incident-managing credentials configured');
     test.setTimeout(120_000);
@@ -123,7 +123,7 @@ test.describe('UAT-INC incident journey', () => {
   });
 
   test('UAT-INC-06 a notification deep-link opens the target incident', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-INC-06' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-INC-extra-deeplink' });
     const u = byRole('RMD') || byRole('ADMIN');
     test.skip(!u, 'No incident-managing credentials configured');
     test.setTimeout(120_000);
@@ -154,7 +154,7 @@ test.describe('UAT-INC incident journey', () => {
   });
 
   test('UAT-INC-04 read-only roles cannot create incidents', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-INC-04' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-INC-neg' });
     const viewer = byRole('EC') || byRole('ERMSC') || byRole('RCB');
     test.skip(!viewer, 'No read-only credentials configured');
 

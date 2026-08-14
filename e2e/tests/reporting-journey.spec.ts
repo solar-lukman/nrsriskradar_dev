@@ -14,7 +14,7 @@ test.describe('UAT-RPT reporting and dashboard', () => {
   test.skip(users.length === 0, 'No E2E user credentials configured');
 
   test('UAT-RPT-01 board report can be generated and archived', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-RPT-01' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-DSH-05' });
     const u = byRole('CRO') || byRole('RMD') || byRole('ADMIN');
     test.skip(!u, 'No reporting credentials configured');
     test.setTimeout(180_000);
@@ -39,7 +39,7 @@ test.describe('UAT-RPT reporting and dashboard', () => {
   });
 
   test('UAT-RPT-02 dashboard cards drill down into filtered views', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-RPT-02' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-DSH-02' });
     const u = byRole('RMD') || byRole('ADMIN') || byRole('CRO');
     test.skip(!u, 'No dashboard credentials configured');
     test.setTimeout(120_000);
@@ -65,7 +65,7 @@ test.describe('UAT-RPT reporting and dashboard', () => {
   });
 
   test('UAT-RPT-03 executive roles reach the executive summary', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-RPT-03' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-DSH-04' });
     const exec = byRole('EC') || byRole('ERMSC') || byRole('RCB');
     test.skip(!exec, 'No executive credentials configured');
 

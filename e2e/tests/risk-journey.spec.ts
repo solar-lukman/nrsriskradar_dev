@@ -43,7 +43,7 @@ test.describe('UAT-RISK risk lifecycle', () => {
   test.skip(users.length === 0, 'No E2E user credentials configured');
 
   test('UAT-RISK-01 RC completes the 4-step wizard and creates a risk', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-RISK-01' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-REG-01' });
     const author = byRole('RC') || byRole('RMD') || byRole('ADMIN');
     test.skip(!author, 'No risk-authoring credentials configured');
     test.setTimeout(120_000);
@@ -100,7 +100,7 @@ test.describe('UAT-RISK risk lifecycle', () => {
   });
 
   test('UAT-RISK-02 wizard blocks progress when mandatory fields are missing', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-RISK-02' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-REG-01-neg' });
     const author = byRole('RC') || byRole('RMD') || byRole('ADMIN');
     test.skip(!author, 'No risk-authoring credentials configured');
 
@@ -118,7 +118,8 @@ test.describe('UAT-RISK risk lifecycle', () => {
   });
 
   test('UAT-RISK-03 submit → claim → approve records approval history', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-RISK-03' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-APP-01' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-APP-02' });
     const author = byRole('RC') || byRole('RO');
     const approver = byRole('RMD') || byRole('CRO') || byRole('ADMIN');
     test.skip(!author || !approver, 'Author or approver credentials not configured');
@@ -182,7 +183,7 @@ test.describe('UAT-RISK risk lifecycle', () => {
   });
 
   test('UAT-RISK-05 reviewer returns for revision, originator resubmits, approval history is ordered', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-RISK-05' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-APP-03' });
     const author = byRole('RC') || byRole('RO');
     const approver = byRole('RMD') || byRole('CRO') || byRole('ADMIN');
     test.skip(!author || !approver, 'Author or approver credentials not configured');
@@ -293,7 +294,7 @@ test.describe('UAT-RISK risk lifecycle', () => {
   });
 
   test('UAT-RISK-04 read-only roles cannot open the wizard', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-RISK-04' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-REG-neg' });
     const viewer = byRole('EC') || byRole('ERMSC') || byRole('RCB');
     test.skip(!viewer, 'No read-only credentials configured');
 

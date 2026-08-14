@@ -74,7 +74,7 @@ test.describe('UAT-WB whistleblowing journey', () => {
   });
 
   test('UAT-WB-04 anonymous follow-up with reference and passphrase can send a message; a wrong passphrase is rejected', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-WB-04' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-WB-extra-followup' });
     test.setTimeout(150_000);
 
     // --- submit a fresh report so we have a real reference/passphrase pair -

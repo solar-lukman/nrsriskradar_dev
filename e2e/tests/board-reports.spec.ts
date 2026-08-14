@@ -17,7 +17,7 @@ test.describe('UAT-BRPT board reports', () => {
   test.skip(users.length === 0, 'No E2E user credentials configured');
 
   test('UAT-BRPT-01 an authorised role generates a board report and downloads the PDF', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-BRPT-01' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-DSH-05' });
     const u = byRole('CRO') || byRole('RMD') || byRole('ADMIN') || byRole('RCB');
     test.skip(!u, 'No board-reporting credentials configured');
     test.setTimeout(180_000);
@@ -46,7 +46,7 @@ test.describe('UAT-BRPT board reports', () => {
   });
 
   test('UAT-BRPT-02 an unauthorised role cannot reach the board reports page', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'uat', description: 'UAT-BRPT-02' });
+    testInfo.annotations.push({ type: 'uat', description: 'UAT-DSH-neg' });
     const viewer = byRole('RC') || byRole('RO') || byRole('USER');
     test.skip(!viewer, 'No restricted-role credentials configured');
 

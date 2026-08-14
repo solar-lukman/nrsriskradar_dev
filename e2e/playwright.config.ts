@@ -13,7 +13,7 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
  */
 export default defineConfig({
   testDir: path.join(dirname, 'tests'),
-  testMatch: /.*\.spec\.ts$/,
+  testMatch: /.*\.(spec|setup)\.ts$/,
   timeout: 60_000,
   expect: { timeout: 10_000 },
   fullyParallel: false,
@@ -33,8 +33,28 @@ export default defineConfig({
     viewport: { width: 1280, height: 900 },
   },
   projects: [
+    // Data seeding — provisions per-case fixtures. Opt-in via --project=seed.
+    {
+      name: 'seed',
+      testMatch: /seed\.setup\.ts$/,
+      use: { ...devices['Desktop Chrome'] },
+    },
+
     // Default project — runs the full suite (auth, negative RBAC, landing, sidebar)
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    {
+      name: 'chromium',
+      testMatch: /.*\.spec\.ts$/,
+      use: { ...devices['Desktop Chrome'] },
+    },
+
+    // Fast role-permutation smoke matrix (routes / sidebar / CTAs per role).
+    // Opt-in: --project=role-smoke (npm run test:e2e:smoke).
+    {
+      name: 'role-smoke',
+      testMatch: /role-smoke\.spec\.ts$/,
+      use: { ...devices['Desktop Chrome'] },
+    },
+
 
     // Cross-browser coverage for role-landing + sidebar-access only
     // (auth + negative-rbac stay on chromium to keep runtime reasonable)

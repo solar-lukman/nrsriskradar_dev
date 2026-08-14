@@ -110,6 +110,26 @@ export const RLS_MATRIX: TableExpectation[] = [
     writeColumn: 'message',
     readOnly: true,
   },
+  {
+    // KRIs: readable by everyone, maintained by the RMD mandate only.
+    table: 'kris',
+    readRoles: 'all',
+    writeRoles: ['ADMIN', 'RMD', 'CRO'],
+    writeColumn: 'name',
+  },
+  {
+    table: 'kri_readings',
+    readRoles: 'all',
+    writeRoles: ['ADMIN', 'RMD', 'CRO'],
+    writeColumn: 'note',
+  },
+  {
+    // Committee decisions are amendable only by their author or an admin.
+    table: 'risk_governance_decisions',
+    readRoles: 'all',
+    writeRoles: ['ADMIN'],
+    writeColumn: 'rationale',
+  },
 ];
 
 export function expectedRead(t: TableExpectation, role: UserRole): Access {
