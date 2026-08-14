@@ -1,0 +1,1375 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`permission matrix — frozen truth table > role x action grid is unchanged 1`] = `
+{
+  "ADMIN": {
+    "bcp.create": true,
+    "bcp.edit": true,
+    "boardreport.generate": true,
+    "incident.assign": true,
+    "incident.create": true,
+    "risk.approve": true,
+    "risk.assign": true,
+    "risk.bulk_approve": true,
+    "risk.claim": true,
+    "risk.create": true,
+    "risk.delete": true,
+    "risk.edit_any": true,
+    "risk.edit_own": true,
+    "risk.reject": true,
+    "risk.submit": true,
+    "sampledata.manage": true,
+    "settings.manage": true,
+    "user.manage": true,
+    "user.set_role": true,
+    "whistleblow.triage": true,
+  },
+  "CRO": {
+    "bcp.create": true,
+    "bcp.edit": true,
+    "boardreport.generate": true,
+    "incident.assign": true,
+    "incident.create": true,
+    "risk.approve": true,
+    "risk.assign": true,
+    "risk.bulk_approve": true,
+    "risk.claim": true,
+    "risk.create": true,
+    "risk.delete": false,
+    "risk.edit_any": true,
+    "risk.edit_own": true,
+    "risk.reject": true,
+    "risk.submit": true,
+    "sampledata.manage": false,
+    "settings.manage": false,
+    "user.manage": false,
+    "user.set_role": false,
+    "whistleblow.triage": true,
+  },
+  "EC": {
+    "bcp.create": false,
+    "bcp.edit": false,
+    "boardreport.generate": false,
+    "incident.assign": false,
+    "incident.create": true,
+    "risk.approve": false,
+    "risk.assign": false,
+    "risk.bulk_approve": false,
+    "risk.claim": false,
+    "risk.create": false,
+    "risk.delete": false,
+    "risk.edit_any": false,
+    "risk.edit_own": false,
+    "risk.reject": false,
+    "risk.submit": false,
+    "sampledata.manage": false,
+    "settings.manage": false,
+    "user.manage": false,
+    "user.set_role": false,
+    "whistleblow.triage": false,
+  },
+  "ERMSC": {
+    "bcp.create": false,
+    "bcp.edit": false,
+    "boardreport.generate": false,
+    "incident.assign": false,
+    "incident.create": true,
+    "risk.approve": false,
+    "risk.assign": false,
+    "risk.bulk_approve": false,
+    "risk.claim": false,
+    "risk.create": false,
+    "risk.delete": false,
+    "risk.edit_any": false,
+    "risk.edit_own": false,
+    "risk.reject": false,
+    "risk.submit": false,
+    "sampledata.manage": false,
+    "settings.manage": false,
+    "user.manage": false,
+    "user.set_role": false,
+    "whistleblow.triage": false,
+  },
+  "RC": {
+    "bcp.create": false,
+    "bcp.edit": false,
+    "boardreport.generate": false,
+    "incident.assign": false,
+    "incident.create": true,
+    "risk.approve": false,
+    "risk.assign": false,
+    "risk.bulk_approve": false,
+    "risk.claim": false,
+    "risk.create": true,
+    "risk.delete": false,
+    "risk.edit_any": false,
+    "risk.edit_own": true,
+    "risk.reject": false,
+    "risk.submit": true,
+    "sampledata.manage": false,
+    "settings.manage": false,
+    "user.manage": false,
+    "user.set_role": false,
+    "whistleblow.triage": false,
+  },
+  "RCB": {
+    "bcp.create": false,
+    "bcp.edit": false,
+    "boardreport.generate": true,
+    "incident.assign": false,
+    "incident.create": true,
+    "risk.approve": false,
+    "risk.assign": false,
+    "risk.bulk_approve": false,
+    "risk.claim": false,
+    "risk.create": false,
+    "risk.delete": false,
+    "risk.edit_any": false,
+    "risk.edit_own": false,
+    "risk.reject": false,
+    "risk.submit": false,
+    "sampledata.manage": false,
+    "settings.manage": false,
+    "user.manage": false,
+    "user.set_role": false,
+    "whistleblow.triage": false,
+  },
+  "RMD": {
+    "bcp.create": true,
+    "bcp.edit": true,
+    "boardreport.generate": true,
+    "incident.assign": true,
+    "incident.create": true,
+    "risk.approve": true,
+    "risk.assign": true,
+    "risk.bulk_approve": false,
+    "risk.claim": true,
+    "risk.create": true,
+    "risk.delete": true,
+    "risk.edit_any": true,
+    "risk.edit_own": true,
+    "risk.reject": true,
+    "risk.submit": true,
+    "sampledata.manage": false,
+    "settings.manage": false,
+    "user.manage": true,
+    "user.set_role": false,
+    "whistleblow.triage": true,
+  },
+  "RO": {
+    "bcp.create": false,
+    "bcp.edit": false,
+    "boardreport.generate": false,
+    "incident.assign": false,
+    "incident.create": true,
+    "risk.approve": false,
+    "risk.assign": true,
+    "risk.bulk_approve": false,
+    "risk.claim": false,
+    "risk.create": true,
+    "risk.delete": false,
+    "risk.edit_any": false,
+    "risk.edit_own": true,
+    "risk.reject": false,
+    "risk.submit": true,
+    "sampledata.manage": false,
+    "settings.manage": false,
+    "user.manage": false,
+    "user.set_role": false,
+    "whistleblow.triage": false,
+  },
+  "RR": {
+    "bcp.create": false,
+    "bcp.edit": false,
+    "boardreport.generate": false,
+    "incident.assign": false,
+    "incident.create": true,
+    "risk.approve": true,
+    "risk.assign": false,
+    "risk.bulk_approve": false,
+    "risk.claim": true,
+    "risk.create": false,
+    "risk.delete": false,
+    "risk.edit_any": false,
+    "risk.edit_own": false,
+    "risk.reject": true,
+    "risk.submit": false,
+    "sampledata.manage": false,
+    "settings.manage": false,
+    "user.manage": false,
+    "user.set_role": false,
+    "whistleblow.triage": false,
+  },
+  "SUPERVISOR": {
+    "bcp.create": false,
+    "bcp.edit": false,
+    "boardreport.generate": false,
+    "incident.assign": true,
+    "incident.create": true,
+    "risk.approve": false,
+    "risk.assign": false,
+    "risk.bulk_approve": false,
+    "risk.claim": true,
+    "risk.create": false,
+    "risk.delete": false,
+    "risk.edit_any": false,
+    "risk.edit_own": false,
+    "risk.reject": false,
+    "risk.submit": false,
+    "sampledata.manage": false,
+    "settings.manage": false,
+    "user.manage": false,
+    "user.set_role": false,
+    "whistleblow.triage": true,
+  },
+  "USER": {
+    "bcp.create": false,
+    "bcp.edit": false,
+    "boardreport.generate": false,
+    "incident.assign": false,
+    "incident.create": true,
+    "risk.approve": false,
+    "risk.assign": false,
+    "risk.bulk_approve": false,
+    "risk.claim": false,
+    "risk.create": false,
+    "risk.delete": false,
+    "risk.edit_any": false,
+    "risk.edit_own": false,
+    "risk.reject": false,
+    "risk.submit": false,
+    "sampledata.manage": false,
+    "settings.manage": false,
+    "user.manage": false,
+    "user.set_role": false,
+    "whistleblow.triage": false,
+  },
+}
+`;
+
+exports[`permission matrix — frozen truth table > role x route (sidebar + guard) grid is unchanged 1`] = `
+{
+  "ADMIN": {
+    "/admin/auth-verification": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/app": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/approvals": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/audit-logs": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/bcp-schema-checks": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/board-reports": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/business-continuity": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/business-continuity/:id/edit": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/business-continuity/new": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/calendar": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/control-documents": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/data-management": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/executive-summary": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/help": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/incidents": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/learning-forum": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/profile": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/reports": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-assessment/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/risk-matrix": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-register": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/settings": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/user-management": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/whistleblow/cases": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/whistleblow/cases/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+  },
+  "CRO": {
+    "/admin/auth-verification": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/app": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/approvals": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/audit-logs": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/bcp-schema-checks": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/board-reports": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/business-continuity/:id/edit": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/business-continuity/new": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/calendar": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/control-documents": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/data-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/executive-summary": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/help": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/incidents": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/learning-forum": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/profile": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/reports": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-assessment/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/risk-matrix": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-register": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/settings": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/user-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/whistleblow/cases/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+  },
+  "EC": {
+    "/admin/auth-verification": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/app": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/approvals": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/audit-logs": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/bcp-schema-checks": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/board-reports": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/:id/edit": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/new": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/calendar": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/control-documents": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/data-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/executive-summary": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/help": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/incidents": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/learning-forum": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/profile": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/reports": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-assessment/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/risk-matrix": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-register": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/settings": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/user-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases/:id": {
+      "guard": false,
+      "sidebar": false,
+    },
+  },
+  "ERMSC": {
+    "/admin/auth-verification": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/app": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/approvals": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/audit-logs": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/bcp-schema-checks": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/board-reports": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/:id/edit": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/new": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/calendar": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/control-documents": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/data-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/executive-summary": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/help": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/incidents": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/learning-forum": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/profile": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/reports": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-assessment/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/risk-matrix": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-register": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/settings": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/user-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases/:id": {
+      "guard": false,
+      "sidebar": false,
+    },
+  },
+  "RC": {
+    "/admin/auth-verification": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/app": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/approvals": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/audit-logs": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/bcp-schema-checks": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/board-reports": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/:id/edit": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/new": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/calendar": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/control-documents": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/data-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/executive-summary": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/help": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/incidents": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/learning-forum": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/profile": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/reports": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/risk-assessment/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/risk-matrix": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/risk-register": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/settings": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/user-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases/:id": {
+      "guard": false,
+      "sidebar": false,
+    },
+  },
+  "RCB": {
+    "/admin/auth-verification": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/app": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/approvals": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/audit-logs": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/bcp-schema-checks": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/board-reports": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/business-continuity": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/:id/edit": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/new": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/calendar": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/control-documents": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/data-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/executive-summary": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/help": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/incidents": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/learning-forum": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/profile": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/reports": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-assessment/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/risk-matrix": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-register": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/settings": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/user-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases/:id": {
+      "guard": false,
+      "sidebar": false,
+    },
+  },
+  "RMD": {
+    "/admin/auth-verification": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/app": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/approvals": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/audit-logs": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/bcp-schema-checks": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/board-reports": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/business-continuity/:id/edit": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/business-continuity/new": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/calendar": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/control-documents": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/data-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/executive-summary": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/help": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/incidents": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/learning-forum": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/profile": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/reports": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-assessment/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/risk-matrix": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-register": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/settings": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/user-management": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/whistleblow/cases": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/whistleblow/cases/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+  },
+  "RO": {
+    "/admin/auth-verification": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/app": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/approvals": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/audit-logs": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/bcp-schema-checks": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/board-reports": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/:id/edit": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/new": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/calendar": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/control-documents": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/data-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/executive-summary": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/help": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/incidents": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/learning-forum": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/profile": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/reports": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/risk-assessment/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/risk-matrix": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/risk-register": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/settings": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/user-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases/:id": {
+      "guard": false,
+      "sidebar": false,
+    },
+  },
+  "RR": {
+    "/admin/auth-verification": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/app": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/approvals": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/audit-logs": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/bcp-schema-checks": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/board-reports": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/:id/edit": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/new": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/calendar": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/control-documents": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/data-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/executive-summary": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/help": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/incidents": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/learning-forum": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/profile": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/reports": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-assessment/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/risk-matrix": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-register": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/settings": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/user-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases/:id": {
+      "guard": false,
+      "sidebar": false,
+    },
+  },
+  "SUPERVISOR": {
+    "/admin/auth-verification": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/app": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/approvals": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/audit-logs": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/bcp-schema-checks": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/board-reports": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/:id/edit": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/new": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/calendar": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/control-documents": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/data-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/executive-summary": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/help": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/incidents": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/learning-forum": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/profile": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/reports": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-assessment/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/risk-matrix": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/risk-register": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/settings": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/user-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/whistleblow/cases/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+  },
+  "USER": {
+    "/admin/auth-verification": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/app": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/approvals": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/audit-logs": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/bcp-schema-checks": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/board-reports": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/:id/edit": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/business-continuity/new": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/calendar": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/control-documents": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/data-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/executive-summary": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/help": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/incidents": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/learning-forum": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/profile": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/reports": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/risk-assessment/:id": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/risk-matrix": {
+      "guard": true,
+      "sidebar": false,
+    },
+    "/risk-register": {
+      "guard": true,
+      "sidebar": true,
+    },
+    "/settings": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/user-management": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases": {
+      "guard": false,
+      "sidebar": false,
+    },
+    "/whistleblow/cases/:id": {
+      "guard": false,
+      "sidebar": false,
+    },
+  },
+}
+`;

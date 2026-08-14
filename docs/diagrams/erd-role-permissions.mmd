@@ -1,0 +1,73 @@
+erDiagram
+    AUTH_USERS ||--|| PROFILES : "1:1 handle_new_user()"
+    AUTH_USERS ||--o{ USER_ROLES : "role grants (source of truth)"
+    USER_ROLES }o--|| APP_ROLE_ENUM : "role value"
+    PROFILES ||--o{ RISKS : "owner / assignee / creator"
+    PROFILES ||--o{ BUSINESS_CONTINUITY_PLANS : "plan owner"
+    PROFILES ||--o{ CONTROL_DOCUMENTS : "document owner"
+    USER_ROLES ||--o{ RLS_POLICIES : "evaluated by has_role()"
+    PROFILES ||--o{ USER_LOGIN_HISTORY : "sign-in trail"
+    PROFILES ||--o{ USER_ACTIVITY_LOGS : "action trail"
+    USER_ROLES ||--o{ SYSTEM_AUDIT_LOGS : "log_user_role_change()"
+    DEPARTMENTS ||--o{ PROFILES : "membership"
+
+    AUTH_USERS {
+        uuid id PK "auth schema - never modified directly"
+        text email
+    }
+    PROFILES {
+        uuid id PK
+        uuid user_id FK "-> auth.users.id"
+        text email
+        text full_name
+        text department
+        user_role role "LEGACY fallback - not authoritative"
+        bool is_locked "admin_set_user_locked()"
+        text locked_reason
+    }
+    USER_ROLES {
+        uuid id PK
+        uuid user_id FK "-> auth.users.id"
+        user_role role "unique per (user_id, role)"
+        uuid assigned_by
+        timestamptz assigned_at "latest = effective role"
+    }
+    APP_ROLE_ENUM {
+        text RC "risk champion"
+        text RR "risk reviewer"
+        text RO "risk owner"
+        text RMD "risk mgmt dept"
+        text CRO "chief risk officer"
+        text ERMSC "steering committee"
+        text EC "executive chairman"
+        text RCB "risk committee board"
+        text SUPERVISOR
+        text ADMIN "wildcard *"
+        text USER "read-only"
+    }
+    RLS_POLICIES {
+        text table_name "every public table"
+        text using_expr "public.has_role(auth.uid(), 'ROLE')"
+        text note "SECURITY DEFINER avoids recursion"
+    }
+    USER_LOGIN_HISTORY {
+        uuid id PK
+        uuid user_id FK
+        bool success
+        text failure_reason
+        inet ip_address
+    }
+    USER_ACTIVITY_LOGS {
+        uuid id PK
+        uuid user_id FK
+        text action
+        text resource_type
+        uuid resource_id
+    }
+    SYSTEM_AUDIT_LOGS {
+        uuid id PK
+        uuid user_id
+        text category "security | access"
+        jsonb details
+        text severity
+    }

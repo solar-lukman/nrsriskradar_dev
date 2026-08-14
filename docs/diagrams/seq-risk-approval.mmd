@@ -1,0 +1,46 @@
+sequenceDiagram
+    autonumber
+    actor S as Submitter (RC/RO)
+    actor R as Reviewer (RR/CRO/RMD)
+    participant UI as RiskWorkflowActions
+    participant WF as riskWorkflow.ts
+    participant RPC as apply_workflow_transition()
+    participant DB as risks / approval_history
+    participant N as send_notification()
+
+    S->>UI: click "Submit for Review"
+    UI->>WF: canPerformWorkflowAction('submit', status, role)
+    WF-->>UI: true (client-side convenience gate)
+    UI->>RPC: rpc(p_risk_id, p_action='submit', p_reason)
+    RPC->>RPC: re-check role + current status server-side
+    RPC->>DB: update approval_status='Submitted', submitted_by, submitted_at,<br/>pre_submission_status = status
+    RPC->>DB: insert approval_history(action, from, to, actor)
+    DB->>N: notify_approval_status_change() -> reviewers
+    RPC-->>UI: { status, approval_status, action }
+    UI-->>S: toast + refetch
+
+    R->>UI: open Approval Inbox
+    UI->>DB: rpc get_approval_inbox()
+    DB-->>UI: buckets (submitted / under review / returned) with age_days
+
+    R->>UI: click "Claim for Review"
+    UI->>RPC: action='review'
+    alt current_reviewer_id is null
+        RPC->>DB: set approval_status='Under Review', current_reviewer_id = auth.uid()
+        RPC-->>UI: ok
+    else already claimed
+        RPC-->>UI: raise CLAIM_CONFLICT
+        UI-->>R: "Already claimed" toast + list refresh
+    end
+
+    alt approve (comment >= 5 chars required)
+        R->>RPC: action='approve', p_reason
+        RPC->>DB: approval_status='Approved', approved_by/at, status -> Approved/New
+        DB->>N: notify submitter + owner
+    else return for revision
+        R->>RPC: action='return', p_reason (mandatory)
+        RPC->>DB: approval_status='Returned', restore status = pre_submission_status,<br/>last_review_comment = reason
+        DB->>N: notify submitter with comments
+    end
+    RPC-->>UI: new state
+    UI-->>R: toast + invalidate ['approval-inbox','risks']

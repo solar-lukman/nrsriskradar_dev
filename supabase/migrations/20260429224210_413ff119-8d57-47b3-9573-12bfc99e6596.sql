@@ -1,0 +1,1 @@
+ALTER TABLE public.board_report_archives ADD COLUMN IF NOT EXISTS is_scheduled BOOLEAN NOT NULL DEFAULT false;

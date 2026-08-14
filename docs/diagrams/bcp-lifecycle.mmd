@@ -1,0 +1,36 @@
+stateDiagram-v2
+    direction LR
+    state "Plan status (bcp_status)" as PlanStatus {
+        [*] --> NeedsReview: create plan<br/>Dept Head, RMD, ADMIN
+        NeedsReview --> Ready: BIA complete + sign-off<br/>RMD, CRO, ADMIN
+        Ready --> NeedsReview: next_review_date reached
+        Ready --> Outdated: review SLA missed
+        NeedsReview --> Outdated: review SLA missed
+        Outdated --> NeedsReview: plan refreshed
+    }
+
+    state "Test status (test_status)" as TestStatus {
+        [*] --> NotTested
+        NotTested --> Passed: drill meets RTO/RPO
+        NotTested --> Failed: drill misses targets
+        Passed --> Overdue: next_test_date passed
+        Failed --> NeedsRemediation
+        NeedsRemediation --> Passed: re-test succeeds
+        Overdue --> Passed
+        Overdue --> Failed
+    }
+
+    note right of PlanStatus
+        Required on create: title, department,
+        business_function, recovery_time_objective,
+        recovery_point_objective, owner_id.
+        reference_number assigned by trigger.
+    end note
+
+    note right of TestStatus
+        Guard (validate_bcp_bia_test_fields):
+        any test_* field requires test_type,
+        test_scope and last_tested_date;
+        bia_* fields require bia_assessment_date.
+        Failed test forces plan back to Needs Review.
+    end note

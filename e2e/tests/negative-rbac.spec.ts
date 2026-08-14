@@ -57,7 +57,6 @@ test.describe('Negative RBAC / RLS', () => {
 
     // Attempt a raw update through the browser context (uses RC's session)
     const result = await page.evaluate(async () => {
-      // @ts-expect-error — supabase is not on window; use fetch against Data API
       const url = (import.meta as any).env?.VITE_SUPABASE_URL;
       const key = (import.meta as any).env?.VITE_SUPABASE_PUBLISHABLE_KEY;
       const session = Object.keys(localStorage)

@@ -1,0 +1,48 @@
+sequenceDiagram
+    autonumber
+    actor U as User (RC / RO / RMD)
+    participant W as RiskWizardDialog
+    participant H as useRisks (React Query)
+    participant SB as supabase-js client
+    participant DB as Postgres + RLS
+    participant TR as Triggers
+
+    rect rgb(240,244,255)
+    Note over U,DB: READ — register list
+    H->>SB: from('risks').select(...)
+    SB->>DB: GET /rest/v1/risks (JWT)
+    DB-->>SB: rows permitted by can_access_risk() policies
+    SB-->>H: data -> cached under ['risks', filters]
+    end
+
+    rect rgb(240,255,244)
+    Note over U,TR: CREATE — 4-step wizard
+    U->>W: complete steps 1-4 (Zod validated per step)
+    W->>H: createRisk(payload)
+    H->>SB: from('risks').insert(payload).select().single()
+    SB->>DB: INSERT (RLS WITH CHECK: submitter role + own department)
+    DB->>TR: generate_risk_reference() -> risk_reference
+    DB->>TR: enforce_risk_appetite() -> may escalate on breach
+    DB->>TR: create_risk_audit_log() -> risk_audit_logs + risk_history
+    DB-->>SB: inserted row
+    SB-->>H: row
+    H-->>W: invalidateQueries(['risks'])
+    end
+
+    rect rgb(255,250,240)
+    Note over U,TR: UPDATE
+    U->>W: edit fields
+    W->>SB: from('risks').update(diff).eq('id', riskId)
+    SB->>DB: PATCH — RLS USING+WITH CHECK re-evaluated
+    DB->>TR: audit trigger writes jsonb diff (who/when/what)
+    DB-->>SB: updated row
+    end
+
+    rect rgb(255,242,242)
+    Note over U,DB: DELETE
+    U->>SB: from('risks').delete().eq('id', riskId)
+    SB->>DB: DELETE — allowed only for ADMIN/RMD policies
+    DB-->>SB: 204 or 0 rows (fails closed)
+    end
+
+    Note over H: Realtime: useRealtimeRisks subscribes to the<br/>`risks` channel and invalidates the cache on change.

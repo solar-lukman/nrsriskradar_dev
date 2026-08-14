@@ -1,19 +1,12 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
+import { ROLE_PERMISSIONS, type UserRole } from '@/lib/permissions';
 
-export type UserRole = 
-  | 'RC'         // Risk Champion
-  | 'RR'         // Risk Reviewer  
-  | 'RO'         // Risk Owner
-  | 'RMD'        // Risk Management Department
-  | 'CRO'        // Chief Risk Officer
-  | 'ERMSC'      // ERM Steering Committee
-  | 'EC'         // Executive Chairman
-  | 'RCB'        // Risk Committee of the Board
-  | 'SUPERVISOR' // Supervisor (Compliance)
-  | 'ADMIN'      // Admin
-  | 'USER';      // General Users
+// Roles live in `src/lib/permissions.ts` (single source of truth) and are
+// re-exported here so existing imports keep working.
+export type { UserRole };
+
 
 export interface UserProfile {
   id: string;
@@ -48,22 +41,13 @@ export interface AuthContextType {
   hasPermission: (permission: string) => boolean;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+// Exported so tests can provide a role-specific context without a live session.
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Role-based permissions
-const rolePermissions: Record<UserRole, string[]> = {
-  'RC': ['view_risks', 'add_risk', 'edit_own_risks', 'view_dashboard'],
-  'RR': ['view_risks', 'review_risks', 'approve_risks', 'use_approval_inbox', 'view_dashboard', 'view_reports'],
-  'RO': ['view_risks', 'add_risk', 'edit_own_risks', 'view_dashboard', 'assign_risks'],
-  'RMD': ['view_risks', 'add_risk', 'edit_risks', 'use_approval_inbox', 'view_dashboard', 'manage_continuity', 'view_reports', 'manage_users', 'manage_whistleblow'],
-  'CRO': ['view_risks', 'add_risk', 'edit_risks', 'use_approval_inbox', 'view_dashboard', 'manage_continuity', 'view_reports', 'approve_all', 'manage_whistleblow'],
-  'ERMSC': ['view_risks', 'view_dashboard', 'view_reports', 'strategic_overview'],
-  'EC': ['view_risks', 'view_dashboard', 'view_reports', 'strategic_overview', 'executive_actions'],
-  'RCB': ['view_risks', 'view_dashboard', 'view_reports', 'strategic_overview', 'board_oversight'],
-  'SUPERVISOR': ['view_risks', 'view_dashboard', 'view_reports', 'use_approval_inbox', 'manage_whistleblow'],
-  'ADMIN': ['*'], // All permissions
-  'USER': ['view_risks', 'view_dashboard']
-};
+
+// Role-based permissions — see `src/lib/permissions.ts`
+const rolePermissions = ROLE_PERMISSIONS;
+
 
 // Mock users for simulation
 const mockUsers: Record<string, User> = {

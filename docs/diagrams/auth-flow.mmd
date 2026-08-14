@@ -1,0 +1,34 @@
+sequenceDiagram
+    autonumber
+    actor U as User (browser)
+    participant LP as LoginPage
+    participant AC as AuthContext
+    participant GT as Auth service (GoTrue)
+    participant DB as Postgres (RLS)
+
+    U->>LP: submit email + password
+    LP->>AC: signIn(email, password)
+    AC->>DB: rpc is_account_locked(email)
+    alt account locked
+        DB-->>AC: true
+        AC-->>LP: error 423 AccountLocked
+        LP-->>U: "contact an administrator"
+    else not locked
+        AC->>GT: signInWithPassword
+        alt invalid credentials
+            GT-->>AC: AuthError
+            AC->>DB: rpc record_failed_login(email)
+            DB-->>AC: locked? (auto-lock at 5 fails / 15 min)
+            AC-->>U: error message
+        else success
+            GT-->>AC: session (JWT)
+            AC->>DB: rpc clear_failed_login_attempts(email)
+            Note over AC: onAuthStateChange fires
+            AC->>DB: select user_roles (primary role)
+            AC->>DB: select profiles (name, department)
+            DB-->>AC: role + profile
+            AC-->>U: isAuthenticated, role-based landing page
+        end
+    end
+
+    Note over U,DB: Every later query carries the JWT.<br/>RLS + security-definer has_role() is the real boundary.<br/>useAutoLogout signs the user out after inactivity.

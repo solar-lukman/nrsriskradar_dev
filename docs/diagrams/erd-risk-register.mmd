@@ -1,0 +1,64 @@
+erDiagram
+    RISKS ||--o{ RISK_ASSESSMENTS : "assessed by"
+    RISKS ||--o{ RISK_CONTROLS : "mitigated by"
+    RISKS ||--o{ RISK_MITIGATION_TASKS : "treated via"
+    RISK_MITIGATION_TASKS ||--o{ RISK_MITIGATION_TASK_HISTORY : "status trail"
+    RISKS ||--o{ RISK_ATTACHMENTS : "evidence"
+    RISKS ||--o{ RISK_HISTORY : "jsonb snapshots"
+    RISKS ||--o{ RISK_AUDIT_LOGS : "who/when/what"
+    RISKS ||--o{ APPROVAL_HISTORY : "governance trail"
+    RISKS ||--o{ AI_PREDICTIONS : "scored by"
+    ASSESSMENT_TEMPLATES ||--o{ RISK_ASSESSMENTS : "answers shape"
+    ASSESSMENT_TEMPLATES ||--o{ TEMPLATE_SECTIONS : contains
+    TEMPLATE_SECTIONS ||--o{ TEMPLATE_QUESTIONS : contains
+    ASSESSMENT_TEMPLATES ||--o{ TEMPLATE_CATEGORY_LINKS : "suggested for"
+    RISK_CATEGORIES ||--o{ RISKS : "classifies (enum synced)"
+    DEPARTMENTS ||--o{ RISKS : "owns"
+    STRATEGIC_OBJECTIVES ||--o{ RISKS : "aligned to"
+    RISK_APPETITE_CONFIG ||--o{ RISKS : "thresholds applied"
+    PROFILES ||--o{ RISKS : "owner / assignee / creator"
+    USER_ROLES ||--o{ PROFILES : "grants"
+
+    RISKS {
+        uuid id PK
+        text risk_reference "generate_risk_reference()"
+        risk_type risk_type "institutional | compliance"
+        risk_category category "synced from risk_categories"
+        int inherent_likelihood
+        int inherent_impact
+        int residual_likelihood
+        int residual_impact
+        risk_status status "lifecycle"
+        approval_status approval_status "governance, orthogonal"
+        uuid owner_id FK
+        uuid current_reviewer_id
+        numeric mitigation_budget
+        text mitigation_budget_currency "NGN default"
+    }
+    RISK_ASSESSMENTS {
+        uuid id PK
+        uuid risk_id FK
+        uuid template_id FK
+        int likelihood
+        int impact
+        jsonb answers
+    }
+    RISK_MITIGATION_TASKS {
+        uuid id PK
+        uuid risk_id FK
+        text status "guarded by transition trigger"
+        date due_date
+    }
+    RISK_HISTORY {
+        uuid id PK
+        uuid risk_id FK
+        jsonb snapshot "append-only"
+        text change_type
+    }
+    APPROVAL_HISTORY {
+        uuid id PK
+        uuid risk_id FK
+        approval_status from_status
+        approval_status to_status
+        uuid actor_id
+    }

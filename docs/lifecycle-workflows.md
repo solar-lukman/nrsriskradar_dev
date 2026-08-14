@@ -2,6 +2,8 @@
 
 This document describes the end-to-end lifecycle for each managed entity in the portal: **Risks** (Institutional and Compliance), **Business Continuity Plans (BCP)**, and **Whistle-blowing Cases**. It is the single source of truth for status transitions, role responsibilities, and audit expectations.
 
+For the normative per-state checklist — allowed transitions, guards and required fields for risks, incidents, whistleblowing and BCP, with state diagrams for each — see [`state-transition-spec.md`](./state-transition-spec.md).
+
 ---
 
 ## 1. Risk Lifecycle (Institutional & Compliance)
@@ -268,3 +270,5 @@ Reading incidents is open to all authenticated users for transparency. Editing (
 - `src/pages/WhistleblowCaseDetail.tsx` — investigator workspace and status transitions
 - `supabase/functions/whistleblow-submit/index.ts`, `whistleblow-follow-up/index.ts` — anonymous endpoints
 - `docs/whistleblowing-user-guide.md` — reporter-facing guidance
+- `docs/state-transition-spec.md` — per-state transitions, guards and required fields
+- `docs/diagrams/incident-lifecycle.mmd`, `whistleblow-lifecycle.mmd`, `bcp-lifecycle.mmd` — state diagrams

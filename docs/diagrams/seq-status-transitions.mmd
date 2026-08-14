@@ -1,0 +1,50 @@
+sequenceDiagram
+    autonumber
+    actor U as Authorized user
+    participant UI as Entity dialog / table
+    participant SB as supabase-js
+    participant DB as Postgres
+    participant TR as Validation & audit triggers
+    participant N as Notifications
+
+    rect rgb(240,244,255)
+    Note over U,N: Risk lifecycle (status) — escalate / de-escalate / crystallize
+    U->>SB: rpc apply_workflow_transition(action='escalate', reason)
+    SB->>DB: server re-checks role + lifecycle guards
+    DB->>TR: log_risk_status_change() -> risk_history snapshot
+    DB->>N: notify CRO / executives
+    DB-->>SB: { status: 'Escalated' }
+    U->>SB: ReportCrystallizedDialog -> insert risk_events + update risks
+    DB->>TR: assign_risk_event_reference(), audit diff
+    end
+
+    rect rgb(255,250,240)
+    Note over U,TR: Incident status (risk_events)
+    U->>SB: from('risk_events').update({ status: 'Under Investigation', owner_id })
+    SB->>DB: PATCH — RLS checks investigator roles
+    DB->>TR: log_risk_event_audit() -> system_audit_logs diff (IncidentTimeline)
+    DB-->>SB: row; app stamps resolution_date/resolved_at on Resolved
+    end
+
+    rect rgb(240,255,244)
+    Note over U,TR: BCP status / test_status
+    U->>SB: from('business_continuity_plans').update({ status, test_* , bia_* })
+    SB->>DB: PATCH
+    DB->>TR: validate_bcp_bia_test_fields() BEFORE UPDATE
+    alt partial BIA/test payload
+        TR-->>SB: raise exception
+        SB-->>UI: bcpServerErrors.ts maps message -> inline field errors
+    else valid
+        DB->>TR: record_bcp_version_history() + create_bcp_audit_log()
+        DB->>N: notify_bcp_change()
+        DB-->>SB: updated plan
+    end
+    end
+
+    rect rgb(255,242,242)
+    Note over U,DB: Whistleblowing case status
+    U->>SB: from('whistleblow_cases').update({ status, assigned_to, resolution_notes })
+    SB->>DB: PATCH — RMD/CRO/ADMIN policies only
+    DB->>DB: insert whistleblow_audit_log(action, performed_by)
+    Note right of DB: Reporter-side transitions never touch the browser client —<br/>they go through whistleblow-submit / whistleblow-follow-up<br/>edge functions using the service role.
+    end

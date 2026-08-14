@@ -1,0 +1,37 @@
+stateDiagram-v2
+    direction LR
+    [*] --> Submitted: public form + Turnstile<br/>whistleblow-submit edge function
+
+    Submitted --> UnderReview: triage<br/>RMD, CRO, ADMIN
+    UnderReview --> Investigation: assign investigator
+    UnderReview --> Dismissed: unfounded (reason required)
+    Investigation --> Escalated: threshold or senior personnel
+    Investigation --> Resolved: resolution_notes required
+    Escalated --> Resolved
+    Resolved --> Closed: after reporter acknowledgement window
+    Dismissed --> [*]
+    Closed --> [*]
+
+    note right of Submitted
+        Required: category, subject, description.
+        Server-generated: case_reference,
+        follow_up_token, reporter_passphrase_hash.
+        Rate-limited per IP + fingerprint.
+    end note
+
+    note right of UnderReview
+        Guard: caller holds RMD/CRO/ADMIN.
+        Sets assigned_to, assigned_at, priority.
+        Unassigned > 14 days -> flagged_unassigned.
+    end note
+
+    note right of Investigation
+        Two-way messaging via whistleblow_messages.
+        No activity > 60 days -> flagged_stagnant.
+    end note
+
+    note right of Resolved
+        Guard: resolution_notes non-empty;
+        resolved_at stamped. Summary is exposed
+        to the reporter via follow-up portal.
+    end note

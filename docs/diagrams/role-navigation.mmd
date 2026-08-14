@@ -1,0 +1,40 @@
+flowchart LR
+    subgraph L1["Layer 1 - route guard"]
+        PR["ProtectedRoute<br/>session exists?"]
+    end
+    subgraph L2["Layer 2 - permissions (UI only)"]
+        RP["rolePermissions[role]<br/>hasPermission(p)"]
+    end
+    subgraph L3["Layer 3 - RLS (real boundary)"]
+        RLS["policies + has_role()"]
+    end
+
+    PR --> RP --> RLS
+
+    RP --> P1["view_dashboard -> /app, /calendar, /help"]
+    RP --> P2["view_risks -> /risk-register, /risk-matrix,<br/>/incidents, /learning-forum"]
+    RP --> P3["use_approval_inbox -> /approvals"]
+    RP --> P4["view_reports -> /reports"]
+    RP --> P5["manage_continuity -> /business-continuity"]
+    RP --> P6["strategic_overview -> /executive-summary"]
+    RP --> P7["board_oversight -> /board-reports"]
+    RP --> P8["manage_whistleblow -> /whistleblow/cases"]
+    RP --> P9["manage_users -> /user-management"]
+    RP --> P10["'*' (ADMIN) -> /settings, /data-management"]
+    RP --> P11["'*' or RMD or CRO -><br/>/audit-logs, /bcp-schema-checks"]
+
+    subgraph Roles["Role -> permission sets"]
+        R1["RC / RO: view+add risks, dashboard"]
+        R2["RR: review, approve, approval inbox, reports"]
+        R3["RMD: edit risks, continuity, reports,<br/>manage users, whistleblow"]
+        R4["CRO: like RMD but NO manage_users"]
+        R5["ERMSC / EC / RCB: read-only + strategic_overview<br/>(RCB adds board_oversight)"]
+        R6["SUPERVISOR: reports, approvals, whistleblow"]
+        R7["USER: view risks + dashboard"]
+        R8["ADMIN: '*'"]
+    end
+
+    Roles --> RP
+
+    CHK["navAccessConsistency.ts<br/>sidebar visibility MUST equal route guard<br/>(dev console + Vitest)"]
+    CHK -.asserts.-> RP

@@ -1,0 +1,4 @@
+project_id = "qpymmsgvrcrqothvmjjr"
+
+[functions.bcp-test-reminders]
+verify_jwt = false

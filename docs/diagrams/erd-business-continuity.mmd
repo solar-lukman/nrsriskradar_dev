@@ -1,0 +1,63 @@
+erDiagram
+    BUSINESS_CONTINUITY_PLANS ||--o{ BCP_VERSION_HISTORY : "field-level diffs"
+    BUSINESS_CONTINUITY_PLANS ||--o{ BCP_AUDIT_LOGS : "who/when/what"
+    DEPARTMENTS ||--o{ BUSINESS_CONTINUITY_PLANS : "owns function"
+    PROFILES ||--o{ BUSINESS_CONTINUITY_PLANS : "plan owner"
+    BACKUP_CONFIGURATIONS ||--o{ BACKUP_LOGS : "runs"
+    BACKUP_LOGS ||--o{ BACKUP_RESTORE_OPERATIONS : "restored from"
+    RECOVERY_CHECKLISTS ||--o{ BACKUP_RESTORE_OPERATIONS : "guides"
+    BCP_SCHEMA_CHECK_LOGS }o--o{ BUSINESS_CONTINUITY_PLANS : "startup column verification"
+
+    BUSINESS_CONTINUITY_PLANS {
+        uuid id PK
+        text reference_number "assign_bcp_reference()"
+        text business_function
+        text department
+        int recovery_time_objective "RTO minutes"
+        int recovery_point_objective "RPO minutes"
+        bcp_status status
+        test_status test_status
+        date last_tested_date
+        date next_test_date
+        text bia_criticality_rating
+        numeric bia_financial_impact
+        int bia_max_tolerable_downtime
+        date bia_assessment_date "trigger-validated"
+        text test_type
+        jsonb test_findings
+    }
+    BCP_VERSION_HISTORY {
+        uuid id PK
+        uuid bcp_id FK
+        text_array changed_fields
+        jsonb before_values
+        jsonb after_values
+        uuid performed_by
+    }
+    BACKUP_CONFIGURATIONS {
+        uuid id PK
+        text backup_type
+        text schedule_cron
+        int retention_days
+        text storage_location
+    }
+    BACKUP_LOGS {
+        uuid id PK
+        uuid configuration_id FK
+        text status
+        bigint file_size_bytes
+        text checksum
+    }
+    BACKUP_RESTORE_OPERATIONS {
+        uuid id PK
+        uuid backup_log_id FK
+        uuid checklist_id FK
+        text status
+        uuid approved_by
+    }
+    BCP_SCHEMA_CHECK_LOGS {
+        uuid id PK
+        text status
+        text_array missing_columns
+        timestamptz checked_at
+    }

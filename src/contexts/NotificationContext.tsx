@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
@@ -99,6 +99,16 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
   const { toast } = useToast();
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [preferences, setPreferences] = useState<NotificationPreferences | null>(null);
+  /**
+   * The realtime subscription is installed once per session, so its INSERT handler
+   * would otherwise close over the initial (null) preferences and ignore every later
+   * mute / quiet-hours edit. Mirror preferences into a ref the handler reads live.
+   */
+  const preferencesRef = useRef<NotificationPreferences | null>(null);
+  useEffect(() => {
+    preferencesRef.current = preferences;
+  }, [preferences]);
+
 
   const unreadCount = notifications.filter(n => !n.is_read).length;
 
@@ -167,12 +177,14 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
           const n = payload.new as Notification;
           setNotifications(prev => (prev.some(x => x.id === n.id) ? prev : [n, ...prev]));
 
-          // Toast gate: respect in-app + category + quiet hours
+          // Toast gate: respect in-app + category + quiet hours (read live, not closed over)
+          const prefs = preferencesRef.current;
           if (
-            preferences?.in_app_enabled !== false &&
-            categoryAllowed(preferences, n) &&
-            !inQuietHours(preferences)
+            prefs?.in_app_enabled !== false &&
+            categoryAllowed(prefs, n) &&
+            !inQuietHours(prefs)
           ) {
+
             toast({
               title: n.title,
               description: n.message,

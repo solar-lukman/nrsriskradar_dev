@@ -1,0 +1,16 @@
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.risk_category_audit_logs TO authenticated;
+GRANT ALL ON public.risk_category_audit_logs TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.assessment_templates TO authenticated;
+GRANT ALL ON public.assessment_templates TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.template_sections TO authenticated;
+GRANT ALL ON public.template_sections TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.template_questions TO authenticated;
+GRANT ALL ON public.template_questions TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.template_category_links TO authenticated;
+GRANT ALL ON public.template_category_links TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.bcp_schema_check_logs TO authenticated;
+GRANT ALL ON public.bcp_schema_check_logs TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.bcp_version_history TO authenticated;
+GRANT ALL ON public.bcp_version_history TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.auth_failed_attempts TO authenticated;
+GRANT ALL ON public.auth_failed_attempts TO service_role;

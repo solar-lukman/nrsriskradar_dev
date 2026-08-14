@@ -150,7 +150,8 @@ New application migrations continue to land in `supabase/migrations/`.
 For each release, apply only the **new** files (by filename timestamp)
 against the on-prem database, then re-run `999_verify_install.sql`.
 
-Track applied migrations with a simple ledger table:
+Track applied migrations with a simple ledger table (created
+automatically by the delta bundles):
 
 ```sql
 CREATE TABLE IF NOT EXISTS public._onprem_migrations (
@@ -158,6 +159,13 @@ CREATE TABLE IF NOT EXISTS public._onprem_migrations (
   applied_at timestamptz NOT NULL DEFAULT now()
 );
 ```
+
+For the full upgrade procedure — delta bundles, edge-function redeploy,
+verification, rollback — see [`UPGRADE-RUNBOOK.md`](./UPGRADE-RUNBOOK.md).
+Delta bundles ship as
+`supabase/migrations-onprem/riskradar-onprem-delta-<YYYY-MM-DD>.sql`;
+the latest is `riskradar-onprem-delta-2026-07-26.sql` (files #92..#111).
+
 
 ## Regenerating the bundle
 

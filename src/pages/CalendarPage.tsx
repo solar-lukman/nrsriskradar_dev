@@ -52,13 +52,17 @@ export default function CalendarPage() {
     const windowStartDate = windowStart.split('T')[0];
     const windowEndDate = windowEnd.split('T')[0];
 
-    const [risksRes, tasksRes, bcpRes, schedRes] = await Promise.all([
+    const [risksRes, tasksRes, bcpRes, bcpTestsRes, schedRes] = await Promise.all([
       supabase.from('risks').select('id, title, review_date').not('review_date', 'is', null)
         .gte('review_date', windowStartDate).lte('review_date', windowEndDate),
       (supabase as any).from('risk_mitigation_tasks').select('id, title, due_date, status, risk_id').not('due_date', 'is', null)
         .gte('due_date', windowStartDate).lte('due_date', windowEndDate),
       supabase.from('business_continuity_plans').select('id, title, next_test_date, department').not('next_test_date', 'is', null)
         .gte('next_test_date', windowStartDate).lte('next_test_date', windowEndDate),
+      (supabase as any).from('bcp_tests')
+        .select('id, bcp_id, test_type, test_status, scheduled_date, business_continuity_plans(title, department)')
+        .eq('test_status', 'Scheduled').not('scheduled_date', 'is', null)
+        .gte('scheduled_date', windowStartDate).lte('scheduled_date', windowEndDate),
       supabase.from('report_schedules').select('id, title, next_run_at, frequency, is_active').eq('is_active', true)
         .gte('next_run_at', windowStart).lte('next_run_at', windowEnd),
     ]);
@@ -87,7 +91,22 @@ export default function CalendarPage() {
       });
     });
 
+    const scheduledKeys = new Set<string>();
+    ((bcpTestsRes as any)?.data || []).forEach((t: any) => {
+      const d = new Date(t.scheduled_date);
+      const plan = t.business_continuity_plans || {};
+      scheduledKeys.add(`${t.bcp_id}-${t.scheduled_date}`);
+      list.push({
+        id: `bcptest-${t.id}`, kind: 'bcp_test', date: d,
+        title: plan.title || 'Continuity test',
+        subtitle: `${t.test_type || 'BCP test'} · ${plan.department || ''}`,
+        href: `/business-continuity/${t.bcp_id}/edit`,
+        overdue: d < now,
+      });
+    });
+
     (bcpRes.data || []).forEach((b: any) => {
+      if (scheduledKeys.has(`${b.id}-${b.next_test_date}`)) return;
       const d = new Date(b.next_test_date);
       list.push({
         id: `bcp-${b.id}`, kind: 'bcp_test', date: d,

@@ -1,0 +1,34 @@
+stateDiagram-v2
+    direction LR
+    [*] --> Open: report incident<br/>any authenticated user
+
+    Open --> UnderInvestigation: assign investigator<br/>RR, RMD, RO, ADMIN
+    UnderInvestigation --> Resolved: corrective actions complete<br/>root cause required
+    Open --> Resolved: minor event, no investigation<br/>RMD, CRO, ADMIN
+    Resolved --> Closed: sign-off<br/>SUPERVISOR, CRO, RMD, ADMIN
+    Resolved --> UnderInvestigation: reopen (new evidence)
+    Closed --> [*]
+
+    note right of Open
+        Required on create: title, event_date,
+        discovered_date, event_description,
+        severity. reported_by auto-stamped.
+    end note
+
+    note right of UnderInvestigation
+        Guard: owner_id must be set.
+        Capture root_cause, financial_impact,
+        operational_impact, immediate_response.
+    end note
+
+    note right of Resolved
+        Guard: root_cause and corrective_actions
+        non-empty. resolution_date / resolved_at
+        auto-stamped by the app layer.
+    end note
+
+    note right of Closed
+        Terminal. Guard: lessons_learned recorded
+        and risk_posture set. Crystallized events
+        keep risk_id linked to the parent risk.
+    end note

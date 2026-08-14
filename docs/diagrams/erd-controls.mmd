@@ -1,0 +1,54 @@
+erDiagram
+    RISKS ||--o{ RISK_CONTROLS : "controlled by"
+    RISKS ||--o{ RISK_ASSESSMENTS : "control score input"
+    CONTROL_DOCUMENTS ||--o{ DOCUMENT_ACKNOWLEDGMENTS : "read receipts"
+    PROFILES ||--o{ RISK_CONTROLS : "control owner"
+    PROFILES ||--o{ CONTROL_DOCUMENTS : "document owner"
+    DEPARTMENTS ||--o{ CONTROL_DOCUMENTS : "scoped to"
+
+    RISK_CONTROLS {
+        uuid id PK
+        uuid risk_id FK
+        text control_name
+        text control_type "preventive | detective | corrective"
+        text effectiveness_rating
+        text status
+        text test_frequency
+        date last_tested_date
+        date next_test_date
+        uuid owner_id FK
+    }
+    CONTROL_DOCUMENTS {
+        uuid id PK
+        text mfiles_id "EDRMS link"
+        text document_number
+        document_type document_type
+        text version
+        document_status status
+        uuid owner_id FK
+        text department
+        date effective_date
+        date next_review_date
+        text file_url "private bucket ref"
+    }
+    DOCUMENT_ACKNOWLEDGMENTS {
+        uuid id PK
+        uuid document_id FK
+        uuid user_id FK
+        text version_acknowledged
+        timestamptz acknowledged_at "append-only"
+    }
+    RISKS {
+        uuid id PK
+        int control_effectiveness_score
+        int target_control_score
+        text control_effectiveness_rating
+        int post_control_likelihood
+        int post_control_impact
+    }
+    RISK_ASSESSMENTS {
+        uuid id PK
+        uuid risk_id FK
+        int control_score
+        date assessment_date
+    }

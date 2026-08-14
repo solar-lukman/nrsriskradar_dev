@@ -1,0 +1,48 @@
+erDiagram
+    WHISTLEBLOW_CASES ||--o{ WHISTLEBLOW_MESSAGES : "two-way thread"
+    WHISTLEBLOW_CASES ||--o{ WHISTLEBLOW_ATTACHMENTS : "evidence refs"
+    WHISTLEBLOW_CASES ||--o{ WHISTLEBLOW_AUDIT_LOG : "append-only trail"
+    WHISTLEBLOW_SUBMISSION_ATTEMPTS }o--o{ WHISTLEBLOW_CASES : "rate limit (no FK, by design)"
+
+    WHISTLEBLOW_CASES {
+        uuid id PK
+        text case_reference "shown to reporter"
+        text follow_up_token "secret, edge-function only"
+        text reporter_passphrase_hash "never plaintext"
+        bool is_anonymous
+        text category
+        text subject
+        text description "sanitized server-side"
+        text status
+        text priority
+        uuid assigned_to "investigator"
+        bool flagged_unassigned ">14 days"
+        bool flagged_stagnant ">60 days"
+    }
+    WHISTLEBLOW_MESSAGES {
+        uuid id PK
+        uuid case_id FK
+        text sender_type "reporter | investigator"
+        uuid sender_id "NULL for reporter"
+        text message
+    }
+    WHISTLEBLOW_ATTACHMENTS {
+        uuid id PK
+        uuid case_id FK
+        text uploaded_by_type
+        text file_path "private bucket: whistleblow-evidence"
+        int file_size "<=10MB, max 5 per case"
+    }
+    WHISTLEBLOW_AUDIT_LOG {
+        uuid id PK
+        uuid case_id FK
+        text action
+        uuid performed_by "NULL for reporter actions"
+        jsonb details
+    }
+    WHISTLEBLOW_SUBMISSION_ATTEMPTS {
+        uuid id PK
+        text ip_address
+        text fingerprint
+        bool succeeded
+    }

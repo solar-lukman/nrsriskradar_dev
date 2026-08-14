@@ -1,0 +1,1636 @@
+{
+  "config": {
+    "argv": [
+      "/nix/store/31sh8fzcbg4sjahp3zj002j0ca8sfvvr-nodejs-22.22.0/bin/node",
+      "/dev-server/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "e2e/playwright.config.ts",
+      "--list"
+    ],
+    "configFile": "/dev-server/e2e/playwright.config.ts",
+    "rootDir": "/dev-server/e2e/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/dev-server/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/dev-server/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.spec\\.ts$/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/dev-server/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "firefox-rbac",
+        "name": "firefox-rbac",
+        "testDir": "/dev-server/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.spec\\.ts$/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/dev-server/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "webkit-rbac",
+        "name": "webkit-rbac",
+        "testDir": "/dev-server/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.spec\\.ts$/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/dev-server/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "tablet-rbac",
+        "name": "tablet-rbac",
+        "testDir": "/dev-server/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.spec\\.ts$/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/dev-server/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "mobile-rbac",
+        "name": "mobile-rbac",
+        "testDir": "/dev-server/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.spec\\.ts$/"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "e2e/report/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "e2e/report/results.json"
+        }
+      ],
+      [
+        "/dev-server/e2e/reporters/uat-report.ts",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "auth.spec.ts",
+      "file": "auth.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Authentication",
+          "file": "auth.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "UAT-AUTH-01-neg rejects invalid credentials",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured (see e2e/.env.example)",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/auth.spec.ts",
+                        "line": 9,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-0836189a553986422c86",
+              "file": "auth.spec.ts",
+              "line": 23,
+              "column": 3
+            },
+            {
+              "title": "UAT-AUTH-01-neg rejects invalid credentials",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured (see e2e/.env.example)",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/auth.spec.ts",
+                        "line": 9,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "firefox-rbac",
+                  "projectName": "firefox-rbac",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-649f56556ab5ce3ec6e1",
+              "file": "auth.spec.ts",
+              "line": 23,
+              "column": 3
+            },
+            {
+              "title": "UAT-AUTH-01-neg rejects invalid credentials",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured (see e2e/.env.example)",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/auth.spec.ts",
+                        "line": 9,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "webkit-rbac",
+                  "projectName": "webkit-rbac",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-8e35120f46983ca32ed7",
+              "file": "auth.spec.ts",
+              "line": 23,
+              "column": 3
+            },
+            {
+              "title": "UAT-AUTH-01-neg rejects invalid credentials",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured (see e2e/.env.example)",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/auth.spec.ts",
+                        "line": 9,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "tablet-rbac",
+                  "projectName": "tablet-rbac",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-c1bea13e839fbadfd570",
+              "file": "auth.spec.ts",
+              "line": 23,
+              "column": 3
+            },
+            {
+              "title": "UAT-AUTH-01-neg rejects invalid credentials",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured (see e2e/.env.example)",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/auth.spec.ts",
+                        "line": 9,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "mobile-rbac",
+                  "projectName": "mobile-rbac",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-fde14cfc10eb59209fbb",
+              "file": "auth.spec.ts",
+              "line": 23,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "bcp-journey.spec.ts",
+      "file": "bcp-journey.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "UAT-BCP business continuity journey",
+          "file": "bcp-journey.spec.ts",
+          "line": 30,
+          "column": 6,
+          "specs": [
+            {
+              "title": "UAT-BCP-01 create a plan with RTO/RPO and mitigation actions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/bcp-journey.spec.ts",
+                        "line": 31,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "999996fa44428eb3231d-1c9517dc18f6ef40655a",
+              "file": "bcp-journey.spec.ts",
+              "line": 33,
+              "column": 3
+            },
+            {
+              "title": "UAT-BCP-02 BIA and test-detail validation errors render inline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/bcp-journey.spec.ts",
+                        "line": 31,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "999996fa44428eb3231d-4bb7b760b909e2bcb152",
+              "file": "bcp-journey.spec.ts",
+              "line": 75,
+              "column": 3
+            },
+            {
+              "title": "UAT-BCP-03 editing a plan writes version history",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/bcp-journey.spec.ts",
+                        "line": 31,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "999996fa44428eb3231d-f6a2ff8863fbdb63380f",
+              "file": "bcp-journey.spec.ts",
+              "line": 105,
+              "column": 3
+            },
+            {
+              "title": "UAT-BCP-05 editing BIA fields twice shows a diff with author and timestamp ordering",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/bcp-journey.spec.ts",
+                        "line": 31,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "999996fa44428eb3231d-b81962a91df1d548b507",
+              "file": "bcp-journey.spec.ts",
+              "line": 137,
+              "column": 3
+            },
+            {
+              "title": "UAT-BCP-04 schema-check log page is admin/RMD only",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/bcp-journey.spec.ts",
+                        "line": 31,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "999996fa44428eb3231d-cdb295c78575487fae7e",
+              "file": "bcp-journey.spec.ts",
+              "line": 198,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "board-reports.spec.ts",
+      "file": "board-reports.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "UAT-BRPT board reports",
+          "file": "board-reports.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "UAT-BRPT-01 an authorised role generates a board report and downloads the PDF",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/board-reports.spec.ts",
+                        "line": 17,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "2d8e6e88186cbd091e8a-5373264d0cbc32dd6f51",
+              "file": "board-reports.spec.ts",
+              "line": 19,
+              "column": 3
+            },
+            {
+              "title": "UAT-BRPT-02 an unauthorised role cannot reach the board reports page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/board-reports.spec.ts",
+                        "line": 17,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "2d8e6e88186cbd091e8a-002110767e487cd68ce2",
+              "file": "board-reports.spec.ts",
+              "line": 48,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "incident-journey.spec.ts",
+      "file": "incident-journey.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "UAT-INC incident journey",
+          "file": "incident-journey.spec.ts",
+          "line": 12,
+          "column": 6,
+          "specs": [
+            {
+              "title": "UAT-INC-01 incidents table supports search, filter and URL state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/incident-journey.spec.ts",
+                        "line": 13,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "935ab6742143b05c7a76-9f1bdc9c92832fe3b4e3",
+              "file": "incident-journey.spec.ts",
+              "line": 15,
+              "column": 3
+            },
+            {
+              "title": "UAT-INC-02 CSV export is offered and triggers a download",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/incident-journey.spec.ts",
+                        "line": 13,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "935ab6742143b05c7a76-d1c2022783b413696644",
+              "file": "incident-journey.spec.ts",
+              "line": 40,
+              "column": 3
+            },
+            {
+              "title": "UAT-INC-03 incident owner can be assigned and the incident closed",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/incident-journey.spec.ts",
+                        "line": 13,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "935ab6742143b05c7a76-38551d8cf6d9c947e854",
+              "file": "incident-journey.spec.ts",
+              "line": 62,
+              "column": 3
+            },
+            {
+              "title": "UAT-INC-05 reassigning the owner is recorded in the timeline, and the notification deep-link opens the incident",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/incident-journey.spec.ts",
+                        "line": 13,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "935ab6742143b05c7a76-178bb7c32014ef583808",
+              "file": "incident-journey.spec.ts",
+              "line": 92,
+              "column": 3
+            },
+            {
+              "title": "UAT-INC-06 a notification deep-link opens the target incident",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/incident-journey.spec.ts",
+                        "line": 13,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "935ab6742143b05c7a76-7a3fae6c823277d817e3",
+              "file": "incident-journey.spec.ts",
+              "line": 125,
+              "column": 3
+            },
+            {
+              "title": "UAT-INC-04 read-only roles cannot create incidents",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/incident-journey.spec.ts",
+                        "line": 13,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "935ab6742143b05c7a76-da7126fc2b0780252d0e",
+              "file": "incident-journey.spec.ts",
+              "line": 156,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "negative-rbac.spec.ts",
+      "file": "negative-rbac.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Negative RBAC / RLS",
+          "file": "negative-rbac.spec.ts",
+          "line": 15,
+          "column": 6,
+          "specs": [
+            {
+              "title": "UAT-AUTH-05 CRO cannot open /user-management",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-5f6cad2d47db078eb5aa",
+              "file": "negative-rbac.spec.ts",
+              "line": 19,
+              "column": 3
+            },
+            {
+              "title": "UAT-REG-neg [EC] cannot see Add Risk action",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-faa2b24725e79c0d8ce7",
+              "file": "negative-rbac.spec.ts",
+              "line": 37,
+              "column": 5
+            },
+            {
+              "title": "UAT-REG-neg [ERMSC] cannot see Add Risk action",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-212a3095bd88b18f7d23",
+              "file": "negative-rbac.spec.ts",
+              "line": 37,
+              "column": 5
+            },
+            {
+              "title": "UAT-REG-neg [RCB] cannot see Add Risk action",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-2cf6aa0d134312984d1d",
+              "file": "negative-rbac.spec.ts",
+              "line": 37,
+              "column": 5
+            },
+            {
+              "title": "UAT-REG-neg [USER] cannot see Add Risk action",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-09326dfb5761cb74c2f3",
+              "file": "negative-rbac.spec.ts",
+              "line": 37,
+              "column": 5
+            },
+            {
+              "title": "UAT-DATA-neg RC cannot update a risk they do not own via Data API",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-34d2f0e5c4e9578320ce",
+              "file": "negative-rbac.spec.ts",
+              "line": 52,
+              "column": 3
+            },
+            {
+              "title": "UAT-WB-neg [RC] cannot open /whistleblow/cases",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-751ae498ca8c7379cad4",
+              "file": "negative-rbac.spec.ts",
+              "line": 90,
+              "column": 5
+            },
+            {
+              "title": "UAT-WB-neg [RO] cannot open /whistleblow/cases",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-f6308564d441445f6053",
+              "file": "negative-rbac.spec.ts",
+              "line": 90,
+              "column": 5
+            },
+            {
+              "title": "UAT-WB-neg [EC] cannot open /whistleblow/cases",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-079f69206728e064956a",
+              "file": "negative-rbac.spec.ts",
+              "line": 90,
+              "column": 5
+            },
+            {
+              "title": "UAT-WB-neg [ERMSC] cannot open /whistleblow/cases",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-5a993368a58dea678436",
+              "file": "negative-rbac.spec.ts",
+              "line": 90,
+              "column": 5
+            },
+            {
+              "title": "UAT-WB-neg [RCB] cannot open /whistleblow/cases",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-eb55675c29ca944ee82c",
+              "file": "negative-rbac.spec.ts",
+              "line": 90,
+              "column": 5
+            },
+            {
+              "title": "UAT-AUTH-05 CRO cannot open /user-management",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "firefox-rbac",
+                  "projectName": "firefox-rbac",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-4d5d9754f5ad94548826",
+              "file": "negative-rbac.spec.ts",
+              "line": 19,
+              "column": 3
+            },
+            {
+              "title": "UAT-AUTH-05 CRO cannot open /user-management",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "webkit-rbac",
+                  "projectName": "webkit-rbac",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-d808156f1e528c56f796",
+              "file": "negative-rbac.spec.ts",
+              "line": 19,
+              "column": 3
+            },
+            {
+              "title": "UAT-AUTH-05 CRO cannot open /user-management",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "tablet-rbac",
+                  "projectName": "tablet-rbac",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-74e61ae1f8e0808ac703",
+              "file": "negative-rbac.spec.ts",
+              "line": 19,
+              "column": 3
+            },
+            {
+              "title": "UAT-AUTH-05 CRO cannot open /user-management",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/negative-rbac.spec.ts",
+                        "line": 16,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "mobile-rbac",
+                  "projectName": "mobile-rbac",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6a7ec974bd94da93c60b-1c3e9d1ef63f5d4957bb",
+              "file": "negative-rbac.spec.ts",
+              "line": 19,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "reporting-journey.spec.ts",
+      "file": "reporting-journey.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "UAT-RPT reporting and dashboard",
+          "file": "reporting-journey.spec.ts",
+          "line": 13,
+          "column": 6,
+          "specs": [
+            {
+              "title": "UAT-RPT-01 board report can be generated and archived",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/reporting-journey.spec.ts",
+                        "line": 14,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3bd563b34f97ff330c08-e0f00ad55d6e328dda55",
+              "file": "reporting-journey.spec.ts",
+              "line": 16,
+              "column": 3
+            },
+            {
+              "title": "UAT-RPT-02 dashboard cards drill down into filtered views",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/reporting-journey.spec.ts",
+                        "line": 14,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3bd563b34f97ff330c08-f40e21b261238fc0f145",
+              "file": "reporting-journey.spec.ts",
+              "line": 41,
+              "column": 3
+            },
+            {
+              "title": "UAT-RPT-03 executive roles reach the executive summary",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/reporting-journey.spec.ts",
+                        "line": 14,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3bd563b34f97ff330c08-874861e5c818f05c9e13",
+              "file": "reporting-journey.spec.ts",
+              "line": 67,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "risk-journey.spec.ts",
+      "file": "risk-journey.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "UAT-RISK risk lifecycle",
+          "file": "risk-journey.spec.ts",
+          "line": 42,
+          "column": 6,
+          "specs": [
+            {
+              "title": "UAT-RISK-01 RC completes the 4-step wizard and creates a risk",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/risk-journey.spec.ts",
+                        "line": 43,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8663d7fe7fd6dd8afce3-0bb8c9a82cf79a230ca4",
+              "file": "risk-journey.spec.ts",
+              "line": 45,
+              "column": 3
+            },
+            {
+              "title": "UAT-RISK-02 wizard blocks progress when mandatory fields are missing",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/risk-journey.spec.ts",
+                        "line": 43,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8663d7fe7fd6dd8afce3-6763c71ea0e060e87b83",
+              "file": "risk-journey.spec.ts",
+              "line": 102,
+              "column": 3
+            },
+            {
+              "title": "UAT-RISK-03 submit → claim → approve records approval history",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/risk-journey.spec.ts",
+                        "line": 43,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8663d7fe7fd6dd8afce3-62985c64412e2509130c",
+              "file": "risk-journey.spec.ts",
+              "line": 120,
+              "column": 3
+            },
+            {
+              "title": "UAT-RISK-05 reviewer returns for revision, originator resubmits, approval history is ordered",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/risk-journey.spec.ts",
+                        "line": 43,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8663d7fe7fd6dd8afce3-64b9b8cd81b260d380ca",
+              "file": "risk-journey.spec.ts",
+              "line": 184,
+              "column": 3
+            },
+            {
+              "title": "UAT-RISK-04 read-only roles cannot open the wizard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/risk-journey.spec.ts",
+                        "line": 43,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8663d7fe7fd6dd8afce3-423910f72cf054fa02b1",
+              "file": "risk-journey.spec.ts",
+              "line": 295,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "rls-matrix.spec.ts",
+      "file": "rls-matrix.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "UAT-RLS Data API matrix",
+          "file": "rls-matrix.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "UAT-RLS-02 non-admin cannot grant themselves ADMIN",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "No E2E user credentials configured",
+                      "location": {
+                        "file": "/dev-server/e2e/tests/rls-matrix.spec.ts",
+                        "line": 17,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "501f79ece584537052b1-98e96d04b1b55083360b",
+              "file": "rls-matrix.spec.ts",
+              "line": 80,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "whistleblow-journey.spec.ts",
+      "file": "whistleblow-journey.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "UAT-WB whistleblowing journey",
+          "file": "whistleblow-journey.spec.ts",
+          "line": 15,
+          "column": 6,
+          "specs": [
+            {
+              "title": "UAT-WB-01 anonymous report can be submitted without a session",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "5e40dd09e1a245b8b6be-dc7fe38a7a1b2f9dbbfe",
+              "file": "whistleblow-journey.spec.ts",
+              "line": 16,
+              "column": 3
+            },
+            {
+              "title": "UAT-WB-02 follow-up requires a valid token",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "5e40dd09e1a245b8b6be-4d0db2af72bf4894d28e",
+              "file": "whistleblow-journey.spec.ts",
+              "line": 60,
+              "column": 3
+            },
+            {
+              "title": "UAT-WB-04 anonymous follow-up with reference and passphrase can send a message; a wrong passphrase is rejected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "5e40dd09e1a245b8b6be-fd6ed2f5ac5c1395fffc",
+              "file": "whistleblow-journey.spec.ts",
+              "line": 76,
+              "column": 3
+            },
+            {
+              "title": "UAT-WB-03 supervisor can triage cases; others cannot",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "5e40dd09e1a245b8b6be-0b3b6631bb083a510993",
+              "file": "whistleblow-journey.spec.ts",
+              "line": 152,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-08-06T16:37:17.883Z",
+    "duration": 130.05999999999995,
+    "expected": 0,
+    "skipped": 46,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,36 @@
+sequenceDiagram
+    autonumber
+    actor U as User (browser)
+    participant AC as AuthContext
+    participant SB as Supabase Auth
+    participant DB as Postgres (RLS)
+    participant SB2 as Sidebar / ProtectedRoute
+
+    Note over AC: App boot — listener registered before any fetch
+    AC->>SB: onAuthStateChange(callback)
+    AC->>SB: getSession()
+    SB-->>AC: session | null
+
+    alt session present
+        AC->>DB: select * from profiles where user_id = auth.uid()
+        DB-->>AC: profile (role, department, is_locked)
+        AC->>DB: rpc get_user_roles(user_uuid)
+        DB-->>AC: user_roles rows
+        AC-->>AC: hydrate user { id, email, role, permissions }
+    else no session
+        AC-->>U: redirect to /login
+    end
+
+    U->>SB2: render app shell
+    SB2->>AC: usePermissions() / user.role
+    Note right of SB2: Sidebar filters nav items by permission;<br/>ProtectedRoute guards the route with the<br/>same permission key (navAccessConsistency test).
+
+    alt permission granted
+        SB2-->>U: render page
+        U->>DB: page queries (select ...)
+        DB-->>U: only rows the RLS policies allow
+    else permission missing
+        SB2-->>U: <AccessDenied /> (no data request issued)
+    end
+
+    Note over DB: RLS is the real boundary — a hand-crafted<br/>request from a hidden route still returns 0 rows.

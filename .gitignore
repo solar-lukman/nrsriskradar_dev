@@ -28,7 +28,6 @@ e2e/.env
 e2e/report/
 e2e/test-results/
 
-# Root environment files
-.env
-.env.*
-!.env.example
+coverage
+e2e/report
+e2e/.env

@@ -13,6 +13,7 @@ import RiskRegisterPage from "./pages/RiskRegisterPage";
 import RiskAssessment from "./pages/RiskAssessment";
 import ReportsDashboardPage from "./pages/ReportsDashboardPage";
 import BusinessContinuityPage from "./pages/BusinessContinuityPage";
+import BCPWizardPage from "./pages/BCPWizardPage";
 import LearningForumPage from "./pages/LearningForumPage";
 import UserManagementPage from "./pages/UserManagementPage";
 import SettingsPage from "./pages/SettingsPage";
@@ -47,6 +48,8 @@ const protectedRoutes: { path: string; element: JSX.Element }[] = [
   { path: "/risk-assessment/:id", element: <RiskAssessment /> },
   { path: "/reports", element: <ReportsDashboardPage /> },
   { path: "/business-continuity", element: <BusinessContinuityPage /> },
+  { path: "/business-continuity/new", element: <BCPWizardPage /> },
+  { path: "/business-continuity/:id/edit", element: <BCPWizardPage /> },
   { path: "/learning-forum", element: <LearningForumPage /> },
   { path: "/user-management", element: <UserManagementPage /> },
   { path: "/settings", element: <SettingsPage /> },

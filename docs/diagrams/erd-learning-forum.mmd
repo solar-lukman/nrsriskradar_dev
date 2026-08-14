@@ -1,0 +1,69 @@
+erDiagram
+    FORUM_CATEGORIES ||--o{ FORUM_DISCUSSIONS : contains
+    FORUM_DISCUSSIONS ||--o{ FORUM_POSTS : "replies"
+    FORUM_POSTS ||--o{ FORUM_POSTS : "threaded parent_post_id"
+    FORUM_DISCUSSIONS ||--o{ FORUM_VOTES : "voted on"
+    FORUM_POSTS ||--o{ FORUM_VOTES : "voted on"
+    PROFILES ||--o{ FORUM_DISCUSSIONS : "author"
+    PROFILES ||--o{ FORUM_POSTS : "author"
+    PROFILES ||--o{ FORUM_MODERATION_LOGS : "moderator"
+    FORUM_MODERATION_LOGS }o--o{ FORUM_DISCUSSIONS : "target_type = discussion"
+    FORUM_MODERATION_LOGS }o--o{ FORUM_POSTS : "target_type = post"
+    TRAINING_MODULES }o--o{ FORUM_CATEGORIES : "CSDD learning topics"
+
+    FORUM_CATEGORIES {
+        uuid id PK
+        text name
+        text icon
+        int display_order
+        bool is_active
+    }
+    FORUM_DISCUSSIONS {
+        uuid id PK
+        uuid category_id FK
+        text title
+        text content
+        uuid author_id FK
+        bool is_pinned
+        bool is_locked
+        bool is_moderated
+        int view_count "trigger increment"
+        int reply_count "trigger maintained"
+        timestamptz last_activity_at
+    }
+    FORUM_POSTS {
+        uuid id PK
+        uuid discussion_id FK
+        uuid parent_post_id FK "NULL = top level"
+        text content
+        uuid author_id FK
+        bool is_moderated
+        bool is_locked
+        uuid updated_by "set_forum_updated_meta()"
+    }
+    FORUM_VOTES {
+        uuid id PK
+        uuid user_id FK
+        uuid discussion_id FK "XOR with post_id"
+        uuid post_id FK
+        text vote_type "up | down"
+    }
+    FORUM_MODERATION_LOGS {
+        uuid id PK
+        uuid moderator_id FK
+        text action
+        text target_type
+        uuid target_id
+        text reason
+        jsonb details
+    }
+    TRAINING_MODULES {
+        uuid id PK
+        text csdd_module_id "external LMS id"
+        text title
+        text category
+        int duration_minutes
+        text difficulty_level
+        text external_url
+        bool is_active
+    }

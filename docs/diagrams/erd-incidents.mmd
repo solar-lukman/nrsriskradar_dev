@@ -1,0 +1,46 @@
+erDiagram
+    RISKS ||--o{ RISK_EVENTS : "crystallizes into (nullable)"
+    RISK_EVENTS ||--o{ NOTIFICATIONS : "deep-linked alerts"
+    PROFILES ||--o{ RISK_EVENTS : "owner / reporter"
+    SYSTEM_AUDIT_LOGS }o--|| RISK_EVENTS : "log_risk_event_audit()"
+
+    RISK_EVENTS {
+        uuid id PK
+        uuid risk_id FK "NULL = standalone incident"
+        text reference_number "assign_risk_event_reference()"
+        text title
+        text event_type
+        date event_date
+        date discovered_date
+        date resolution_date
+        text severity
+        numeric financial_impact
+        text financial_impact_currency
+        text root_cause
+        jsonb corrective_actions
+        text lessons_learned
+        uuid owner_id "incident ownership"
+        text status
+    }
+    NOTIFICATIONS {
+        uuid id PK
+        uuid user_id
+        text category
+        text resource_type "risk_event"
+        uuid resource_id FK
+        bool is_read
+    }
+    SYSTEM_AUDIT_LOGS {
+        uuid id PK
+        uuid user_id
+        text action
+        text resource_type
+        uuid resource_id
+        jsonb details
+    }
+    RISKS {
+        uuid id PK
+        text crystallization_status
+        timestamptz crystallized_at
+        numeric actual_impact_amount
+    }

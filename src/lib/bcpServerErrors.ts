@@ -30,6 +30,26 @@ export function mapBcpServerError(error: any): MappedServerError {
   const raw = error?.message || error?.details || String(error || '');
   const fieldErrors: Record<string, string> = {};
 
+  if (raw.includes('BCP_STATUS_OVERRIDE_FORBIDDEN')) {
+    return {
+      fieldErrors: {},
+      generalMessage: 'Only Admin or CRO users can override the plan status.',
+    };
+  }
+  if (raw.includes('BCP_STATUS_OVERRIDE_REASON_REQUIRED')) {
+    return {
+      fieldErrors: { statusOverrideReason: 'A justification is required when overriding the plan status' },
+      generalMessage: null,
+    };
+  }
+  if (raw.includes('BCP_SIGNOFF_FORBIDDEN')) {
+    return {
+      fieldErrors: {},
+      generalMessage: 'Only RMD, CRO or Admin users can sign off a continuity plan.',
+    };
+  }
+
+
   for (const [col, field] of Object.entries(COLUMN_TO_FIELD)) {
     if (raw.includes(col)) {
       // Take first sentence of message for cleaner UI

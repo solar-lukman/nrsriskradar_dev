@@ -1,5 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+// package.json sets "type": "module", so __dirname is not defined here.
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * Playwright config for RiskRadar UAT / RBAC e2e suite.
@@ -8,7 +12,8 @@ import path from 'node:path';
  * Base URL defaults to the local Vite dev server (bun run dev on :8080).
  */
 export default defineConfig({
-  testDir: path.join(__dirname, 'tests'),
+  testDir: path.join(dirname, 'tests'),
+  testMatch: /.*\.spec\.ts$/,
   timeout: 60_000,
   expect: { timeout: 10_000 },
   fullyParallel: false,
@@ -18,7 +23,7 @@ export default defineConfig({
     ['list'],
     ['html', { outputFolder: 'e2e/report/html', open: 'never' }],
     ['json', { outputFile: 'e2e/report/results.json' }],
-    [path.join(__dirname, 'reporters/uat-report.ts')],
+    [path.join(dirname, 'reporters/uat-report.ts')],
   ],
   use: {
     baseURL: process.env.E2E_BASE_URL || 'http://localhost:8080',

@@ -1,0 +1,30 @@
+stateDiagram-v2
+    direction LR
+    [*] --> Draft
+
+    Draft --> Submitted: submit (RC/RO/RMD/ADMIN)
+    Submitted --> Approved: approve
+    Submitted --> Draft: withdraw (submitter, no reviewer claimed)
+    Approved --> New
+    New --> InReview: assessment starts
+    InReview --> Mitigated: all treatment tasks complete
+    InReview --> Escalated: escalate (approvers)
+    Submitted --> Escalated: escalate
+    Escalated --> InReview: deescalate (ADMIN/CRO/RMD)
+
+    New --> Crystallized: risk event reported
+    InReview --> Crystallized: risk event reported
+    Mitigated --> [*]
+    Crystallized --> [*]
+
+    note right of Crystallized
+        Terminal. Created via
+        ReportCrystallizedDialog
+        + risk_events row.
+    end note
+
+    note right of Mitigated
+        Terminal for the lifecycle.
+        escalate is blocked once
+        Mitigated or Crystallized.
+    end note

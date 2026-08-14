@@ -1,0 +1,32 @@
+stateDiagram-v2
+    direction LR
+    [*] --> Draft
+
+    Draft --> Submitted: submit<br/>RC, RO, RMD, ADMIN
+    Returned --> Submitted: resubmit
+    Submitted --> UnderReview: review (claim-lock)<br/>RR, RMD, CRO, ADMIN
+    Submitted --> Approved: approve<br/>RR, SUPERVISOR, CRO, RMD, ADMIN
+    UnderReview --> Approved: approve
+    Submitted --> Returned: return / reject
+    UnderReview --> Returned: return / reject
+    Submitted --> Draft: withdraw<br/>submitter only, no reviewer
+    Approved --> [*]
+
+    note right of UnderReview
+        review claims the item for one
+        reviewer (hasReviewer lock) so two
+        people cannot work it in parallel.
+    end note
+
+    note right of Returned
+        return restores
+        pre_submission_status
+        inside apply_workflow_transition.
+    end note
+
+    note left of Draft
+        risks.approval_status is orthogonal
+        to risks.status (lifecycle).
+        Authority: canPerformWorkflowAction()
+        mirrored by the RPC server-side.
+    end note

@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Loader2, Plus, FileText, Download, LayoutList } from 'lucide-react';
-import { AddBCPDialog } from '@/components/bcp/AddBCPDialog';
-import { EditBCPDialog } from '@/components/bcp/EditBCPDialog';
+import { Plus, Download, LayoutList, X, ShieldAlert } from 'lucide-react';
 import { ViewBCPDialog } from '@/components/bcp/ViewBCPDialog';
 import { ExportBCPMenu } from '@/components/bcp/ExportBCPMenu';
-import { BIASummaryWidget } from '@/components/bcp/BIASummaryWidget';
+import { BCPKpiCards } from '@/components/bcp/BCPKpiCards';
+import { BCPAnalyticsTabs } from '@/components/bcp/BCPAnalyticsTabs';
 import { AccessDenied } from '@/components/AccessDenied';
 import { verifyBcpSchema } from '@/lib/bcpSchemaCheck';
 import { BCPTable, bcpRowsToCSV } from '@/components/bcp/BCPTable';
+import { matchesBCPQuickFilter } from '@/lib/bcpMetrics';
 
 interface BCPlan {
   id: string;
@@ -33,9 +36,6 @@ interface BCPlan {
   supporting_documents: any[];
   owner_id: string;
   created_at: string;
-  owner_profile?: {
-    full_name: string;
-  };
   bia_criticality_rating?: string;
   bia_financial_impact?: number;
   bia_operational_impact?: string;
@@ -49,17 +49,23 @@ interface BCPlan {
   test_findings?: any[];
 }
 
+interface QuickFilter {
+  /** KPI card key — resolved through BCP_QUICK_FILTERS so counts and rows agree. */
+  key: string;
+  label: string;
+}
+
 export default function BusinessContinuity() {
   const { user, hasPermission } = useAuth();
+  const navigate = useNavigate();
   const [plans, setPlans] = useState<BCPlan[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedPlan, setSelectedPlan] = useState<BCPlan | null>(null);
-  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
   const [viewAllOpen, setViewAllOpen] = useState(false);
   const [viewAllRows, setViewAllRows] = useState<BCPlan[]>([]);
+  const [quickFilter, setQuickFilter] = useState<QuickFilter | null>(null);
 
   const hasAccess = hasPermission('manage_continuity') || ['RMD', 'CRO', 'ADMIN'].includes(user?.role || '');
 
@@ -70,49 +76,36 @@ export default function BusinessContinuity() {
     } else if (user && !hasAccess) {
       setLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, hasAccess]);
 
   const fetchBCPs = async () => {
     try {
       setLoading(true);
-      console.log('Fetching BCP plans...');
-      
-      if (!user) {
-        console.log('No user authenticated, skipping BCP fetch');
+      if (!user || !hasAccess) {
         setPlans([]);
         return;
       }
 
-      if (!hasAccess) {
-        console.log('User has no BCP access, skipping fetch');
-        setPlans([]);
-        return;
-      }
-      
-      // Query business continuity plans with proper error handling
       const { data, error } = await supabase
         .from('business_continuity_plans')
         .select('*')
         .order('created_at', { ascending: false });
 
       if (error) {
-        console.error('BCP fetch error:', error);
         if (error.message.includes('infinite recursion')) {
           throw new Error('Database configuration error. Please contact administrator.');
         }
         throw error;
       }
-      
-      console.log('BCP plans fetched successfully:', data?.length || 0);
-      
-      // Transform the data to match our interface
-      const transformedData = (data || []).map(plan => ({
+
+      const transformedData = (data || []).map((plan) => ({
         ...plan,
         dependencies: Array.isArray(plan.dependencies) ? plan.dependencies : [],
         mitigation_actions: Array.isArray(plan.mitigation_actions) ? plan.mitigation_actions : [],
-        supporting_documents: Array.isArray(plan.supporting_documents) ? plan.supporting_documents : []
+        supporting_documents: Array.isArray(plan.supporting_documents) ? plan.supporting_documents : [],
       })) as unknown as BCPlan[];
-      
+
       setPlans(transformedData);
       setError(null);
     } catch (err: any) {
@@ -124,54 +117,34 @@ export default function BusinessContinuity() {
     }
   };
 
-  // Check if user has access
-  if (!user || !hasAccess) {
-    return (
-      <AccessDenied message="This module is only available to RMD and critical department heads." />
-    );
-  }
+  const filteredPlans = useMemo(() => {
+    if (!quickFilter) return plans;
+    const now = new Date();
+    return plans.filter((p) => matchesBCPQuickFilter(p as any, quickFilter.key, now));
+  }, [plans, quickFilter]);
 
-  const handleEdit = (plan: BCPlan) => {
-    setSelectedPlan(plan);
-    setIsEditDialogOpen(true);
-  };
+  if (!user || !hasAccess) {
+    return <AccessDenied message="This module is only available to RMD and critical department heads." />;
+  }
 
   const handleView = (plan: BCPlan) => {
     setSelectedPlan(plan);
     setIsViewDialogOpen(true);
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'Ready':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'Needs Review':
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'Outdated':
-        return 'bg-red-100 text-red-800 border-red-200';
-      default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
-    }
-  };
-
-  const getTestStatusColor = (status: string) => {
-    switch (status) {
-      case 'Passed':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'Failed':
-      case 'Overdue':
-        return 'bg-red-100 text-red-800 border-red-200';
-      case 'Not Tested':
-        return 'bg-gray-100 text-gray-800 border-gray-200';
-      default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
-    }
-  };
+  const handleEdit = (plan: BCPlan) => navigate(`/business-continuity/${plan.id}/edit`);
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="w-8 h-8 animate-spin" />
+      <div className="space-y-6">
+        <Skeleton className="h-10 w-72" />
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <Skeleton key={i} className="h-28" />
+          ))}
+        </div>
+        <Skeleton className="h-24" />
+        <Skeleton className="h-72" />
       </div>
     );
   }
@@ -187,90 +160,83 @@ export default function BusinessContinuity() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-3xl font-bold">Business Continuity Register</h1>
           <p className="text-muted-foreground">
-            Manage business continuity plans and recovery procedures
+            Plan, assess, test and evidence recovery for every critical business function
           </p>
         </div>
         <div className="flex gap-2">
           <ExportBCPMenu plans={plans} />
-          <Button onClick={() => setIsAddDialogOpen(true)}>
+          <Button onClick={() => navigate('/business-continuity/new')}>
             <Plus className="w-4 h-4 mr-2" />
-            Add BCP
+            New plan
           </Button>
         </div>
       </div>
 
-      {/* Quick Stats */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Plans</CardTitle>
-            <FileText className="w-4 h-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{plans.length}</div>
+      {plans.length === 0 ? (
+        <Card className="border-dashed">
+          <CardContent className="flex flex-col items-center gap-2 py-16 text-center">
+            <ShieldAlert className="h-10 w-10 text-muted-foreground" />
+            <p className="text-lg font-medium">No continuity plans yet</p>
+            <p className="max-w-md text-sm text-muted-foreground">
+              The guided wizard walks you through plan basics, mitigation actions, the business impact
+              assessment and the test log in a single flow.
+            </p>
+            <Button className="mt-2" onClick={() => navigate('/business-continuity/new')}>
+              <Plus className="w-4 h-4 mr-2" /> Create the first plan
+            </Button>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Ready</CardTitle>
-            <div className="w-3 h-3 bg-green-500 rounded-full" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {plans.filter(p => p.status === 'Ready').length}
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Need Review</CardTitle>
-            <div className="w-3 h-3 bg-yellow-500 rounded-full" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {plans.filter(p => p.status === 'Needs Review').length}
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Outdated</CardTitle>
-            <div className="w-3 h-3 bg-red-500 rounded-full" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {plans.filter(p => p.status === 'Outdated').length}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* BIA Summary */}
-      <BIASummaryWidget plans={plans} />
-
-      {/* Recent BCP Table (first 10) */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0">
-          <CardTitle>Recent Business Continuity Plans</CardTitle>
-          <Button variant="outline" size="sm" onClick={() => setViewAllOpen(true)}>
-            <LayoutList className="w-4 h-4 mr-2" />
-            View all plans
-          </Button>
-        </CardHeader>
-        <CardContent>
-          <BCPTable
+      ) : (
+        <>
+          <BCPKpiCards
             plans={plans}
-            onView={handleView}
-            onEdit={handleEdit}
-            initialPageSize={10}
-            urlKey="rec"
+            activeFilter={quickFilter?.key ?? null}
+            onSelect={(f) =>
+              setQuickFilter((prev) => (prev && prev.key === f.key ? null : f))
+            }
           />
-        </CardContent>
-      </Card>
+
+          <BCPAnalyticsTabs plans={plans} />
+
+          <Card>
+            <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-2 space-y-0">
+              <div className="flex items-center gap-2">
+                <CardTitle>Continuity plans</CardTitle>
+                {quickFilter && (
+                  <Badge variant="secondary" className="gap-1">
+                    {quickFilter.label}
+                    <button
+                      type="button"
+                      aria-label="Clear quick filter"
+                      onClick={() => setQuickFilter(null)}
+                      className="ml-1"
+                    >
+                      <X className="h-3 w-3" />
+                    </button>
+                  </Badge>
+                )}
+              </div>
+              <Button variant="outline" size="sm" onClick={() => setViewAllOpen(true)}>
+                <LayoutList className="w-4 h-4 mr-2" />
+                View all plans
+              </Button>
+            </CardHeader>
+            <CardContent>
+              <BCPTable
+                plans={filteredPlans}
+                onView={handleView}
+                onEdit={handleEdit}
+                initialPageSize={10}
+                urlKey="rec"
+              />
+            </CardContent>
+          </Card>
+        </>
+      )}
 
       {/* View All Dialog */}
       <Dialog open={viewAllOpen} onOpenChange={setViewAllOpen}>
@@ -314,27 +280,12 @@ export default function BusinessContinuity() {
         </DialogContent>
       </Dialog>
 
-      {/* Dialogs */}
-      <AddBCPDialog
-        open={isAddDialogOpen}
-        onOpenChange={setIsAddDialogOpen}
-        onSuccess={fetchBCPs}
-      />
-
       {selectedPlan && (
-        <>
-          <EditBCPDialog
-            open={isEditDialogOpen}
-            onOpenChange={setIsEditDialogOpen}
-            plan={selectedPlan}
-            onSuccess={fetchBCPs}
-          />
-          <ViewBCPDialog
-            open={isViewDialogOpen}
-            onOpenChange={setIsViewDialogOpen}
-            plan={selectedPlan}
-          />
-        </>
+        <ViewBCPDialog
+          open={isViewDialogOpen}
+          onOpenChange={setIsViewDialogOpen}
+          plan={selectedPlan as any}
+        />
       )}
     </div>
   );
